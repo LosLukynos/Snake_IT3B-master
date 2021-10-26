@@ -16,7 +16,12 @@ namespace Snake_IT3B
         List<PictureBox> ocasHada1;
         double smer1;
         double rychlost1;
+
         PictureBox had2;
+        List<PictureBox> ocasHada2;
+        double smer2;
+        double rychlost2;
+
         Timer timer;
 
         public Form1()
@@ -41,6 +46,15 @@ namespace Snake_IT3B
             {
                 smer1 -= 0.1;
             }
+
+            if (e.KeyCode == Keys.K)
+            {
+                smer2 -= 0.1;
+            }
+            else if (e.KeyCode == Keys.L)
+            {
+                smer2 -= 0.1;
+            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -52,7 +66,16 @@ namespace Snake_IT3B
             var zmenaY = rychlost1 * -Math.Sin(smer1);
             had1.Location = new Point(ocasHada1.Last().Location.X + Convert.ToInt32(zmenaX), ocasHada1.Last().Location.Y + Convert.ToInt32(zmenaY));
             had1.BackColor = Color.Blue;
-            this.Controls.Add(had1);            
+            this.Controls.Add(had1);
+
+            ocasHada2.Add(had2);
+            had2 = new PictureBox();
+            had2.Size = new Size(10, 10);
+            var zmenaK = rychlost2 * Math.Cos(smer2);
+            var zmenaL = rychlost2 * -Math.Sin(smer2);
+            had2.Location = new Point(ocasHada2.Last().Location.X + Convert.ToInt32(zmenaK), ocasHada2.Last().Location.Y + Convert.ToInt32(zmenaL));
+            had2.BackColor = Color.Red;
+            this.Controls.Add(had2);
         }
 
         private void VytvorHady()
@@ -66,9 +89,12 @@ namespace Snake_IT3B
             had1.BackColor = Color.Blue;
             this.Controls.Add(had1);
 
+            ocasHada2 = new List<PictureBox>();
+            smer2 = 0;
+            rychlost2 = 2;
             had2 = new PictureBox();
             had2.Size = new Size(10, 10);
-            had2.Location = new Point(ClientSize.Width - 60, 10);
+            had2.Location = new Point(600,10);
             had2.BackColor = Color.Red;
             this.Controls.Add(had2);
         }
